@@ -1,0 +1,107 @@
+#!/bin/bash
+
+function alias_apt {
+	alias upd='sudo apt update'
+	alias upg='sudo apt upgrade'
+	alias ins='sudo apt install'
+	alias rmv='sudo apt remove'
+	alias prg='sudo apt purge'
+	alias atr='sudo apt autoremove'
+}
+
+function alias_git {
+	alias glg='git log'
+	alias gbr='git branch'
+	alias gbrd='git branch -d'
+	alias gbrD='git branch -D'
+	alias gbrc='git branch --show-current'
+	alias gad='git add'
+	alias gada='git add -a'
+	alias gadu='git add -u'
+	alias gst='git status'
+	alias gcm='git commit -m'
+	alias gcma='git commit --amend'
+	alias gss='git stash'
+	alias gssc='git stash clear'
+	alias gssp='git stash pop'
+	alias gck='git checkout'
+	alias gckb='git checkout -b'
+	alias gmr='git merge'
+	alias grs='git reset'
+	alias grsh='git reset --hard'
+	alias grss='git reset --soft'
+	alias gcp='git cherry-pick'
+	alias gdf='git diff'
+	alias gps='git push'
+	alias gpsf='git push --force'
+	alias gpso='git push origin'
+	alias gpsod='git push origin --delete'
+	alias gpss='git push --set-upstream'
+	alias gpsso='git push --set-upstream origin'
+	alias gpssoc='git push --set-upstream origin $(git branch --show-current)'
+	alias gpl='git pull --rebase'	
+	alias gft='git fetch'
+	alias gtg='git tag'
+	alias gtgd='git tag --delete'
+	alias grt='git remote'
+	alias grta='git remote add'
+	alias grtg='git remote get-url'
+	alias grts='git remote set-url'
+	alias grtao='git remote add origin'
+	alias grtgo='git remote get-url origin'
+	alias grtso='git remote set-url origin'
+	alias grm='git rm'
+	alias gmv='git mv'
+	alias gsh='git show'
+	alias gcl='git clean'
+	alias gcln='git cln -n'
+	alias gclf='git cln -f'
+	alias gfb='git filter-branch'
+	alias gfbf='git filter-branch -f'
+	alias gcl='git clone'
+}
+
+function alias_py {
+	alias spy='nohup spyder3 &'
+	alias py='python3'
+	alias py2='python'
+	alias pin='pip3 install'
+	alias pun='pip3 uninstall'
+	alias pfr='pip3 freeze'
+	alias psh='pip3 show'
+	alias psr='pip3 search'
+	alias pls='pip3 list'
+	alias p2in='pip install'
+	alias p2un='pip uninstall'
+	alias p2fr='pip freeze'
+	alias p2sh='pip show'
+	alias p2sr='pip search'
+	alias p2ls='pip list'
+	alias prq='pipreqs'
+	alias prqf='pipreqs --force'
+}
+
+function alias_conda {
+	alias cpy='nohup spyder &'
+	alias cin='conda install'
+	alias crm='conda remove'
+	alias cac='export PYTHONNOUSERSITE=1 && conda activate'
+	alias cde='export PYTHONNOUSERSITE=0 && conda deactivate'
+	alias csr='conda search'
+	alias cup='conda update'
+	alias cpk='conda package'
+	alias cls='conda list'
+	alias ccr='conda create'
+}
+
+function alias_misc {
+	alias st='sudo subl'
+	alias brc='sudo subl ~/.bashrc'
+	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
+}
+
+alias_apt
+alias_git
+alias_py
+alias_conda
+alias_misc
