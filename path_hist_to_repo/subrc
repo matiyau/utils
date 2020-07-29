@@ -2,3 +2,6 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 alias gptr="python3 $DIR/git_filter.py"
+alias gptrf="python3 $DIR/git_filter.py -f"
+alias gptrnb="python3 $DIR/git_filter.py -nb"
+alias gptrfnb="python3 $DIR/git_filter.py -f -nb"

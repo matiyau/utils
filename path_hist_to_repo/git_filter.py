@@ -47,7 +47,7 @@ def get_rm_list(dir_path, rel_path_tree):
     return rm_list
 
 
-def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
+def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True, force=False):
     """
     filt(src_paths, dst_repo, dst_branch, bkp_repo=True)
 
@@ -71,6 +71,9 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
         If True, a backup will be created before
         proceeding
 
+    force : bool, optional
+        If True, the force option will be used in git commands
+
     Raises
     ------
     OSError
@@ -88,6 +91,11 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
     src_branch = os.popen("git branch --show-current").read().strip("\n")
     if (bkp):
         os.system("git branch -c " + src_branch + " " + src_branch + "_bkp")
+
+    if (force):
+        f_flag = " -f"
+    else:
+        f_flag = ""
 
     if (dst_branch is None):
         dst_branch="master"
@@ -110,10 +118,11 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
     rm_cmd_pre = "git rm --cached --ignore-unmatch -r "
     rm_list = get_rm_list(cwd, path_tree)
     rm_cmd = rm_cmd_pre + " ".join(rm_list)
-    os.system("git filter-branch -f --index-filter '" + rm_cmd + "' HEAD")
-    os.system("git filter-branch -f --prune-empty "
+    os.system("git filter-branch" + f_flag +
+              " --index-filter '" + rm_cmd + "' HEAD")
+    os.system("git filter-branch" + f_flag + " --prune-empty "
               "--tag-name-filter cat -- --all")
-    
+
     if (dst_repo is not None):
         os.system("git push " + dst_repo + " " + src_branch)
         tags = os.popen("git tag").read().split("\n")
@@ -123,8 +132,8 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
             tag_branches = os.popen("git branch --contains '" +
                                     tag + "'").read().split("\n")
             if src_branch in tag_branches:
-                os.system("git push " + dst_repo + " '" + tag + "'")
-
+                os.system("git push" + f_flag + " " +
+                          dst_repo + " '" + tag + "'")
     return
 
 
@@ -138,7 +147,9 @@ if __name__ == "__main__":
                         help="Destination Remote Repository")
     parser.add_argument("-db", default=None,
                         help="Destination Branch")
-    parser.add_argument("-b", default=True, action='store_false',
-                        help="Create a backup before proceeding")
+    parser.add_argument("-nb", default=True, action='store_false',
+                        help="Don't create a backup before proceeding")
+    parser.add_argument("-f", default=False, action='store_true',
+                        help="Use the force option for git commands")
     args = parser.parse_args()
-    filt(args.sp, args.dr, args.db, args.bk)
+    filt(args.sp, args.dr, args.db, args.nb, args.f)
