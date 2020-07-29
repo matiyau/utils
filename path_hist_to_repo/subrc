@@ -1,4 +1,4 @@
 #!/bin/bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-FILE="$( basename "${BASH_SOURCE[0]}" )"
+alias gptr="python3 $DIR/git_filter.py"
