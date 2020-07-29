@@ -60,7 +60,7 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
         Paths of source files/directories
 
     dst_repo : str or None, optional
-        Destination remote repo URL. If not specified, migration
+        Destination remote repo URL. If not specified, filtered
         branch will not be pushed
 
     dst_branch : str or None, optional
@@ -85,9 +85,12 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
     if not os.path.exists(os.path.join(cwd, ".git")):
         raise OSError(str(cwd) + " Is Not A Git Repository")
 
+    src_branch = os.popen("git branch --show-current").read().strip("\n")
+    if (bkp):
+        os.system("git branch -c " + src_branch + " " + src_branch + "_bkp")
+
     if (dst_branch is None):
         dst_branch="master"
-    src_branch = os.popen("git branch --show-current").read().strip("\n")
 
     if (".git" not in src_paths):
         src_paths.append(".git")
