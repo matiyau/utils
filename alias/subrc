@@ -51,6 +51,7 @@ function alias_git {
 	alias grtgo='git remote get-url origin'
 	alias grtso='git remote set-url origin'
 	alias grm='git rm'
+	alias grmc='git rm --cached'
 	alias gmv='git mv'
 	alias gsh='git show'
 	alias gcl='git clean'
