@@ -9,26 +9,6 @@ Created on Tue Jul 28 01:31:03 2020
 import argparse
 import os
 
-def get_find_args(rel_path):
-    """
-    get_find_args(rel_path)
-
-    Get the argument to be inserted to the find command so as to exclude
-    the given path from search
-
-    Parameters
-    ----------
-    rel_path : str
-        Path of directory/file
-
-    Returns
-    -------
-    str
-        Argument for find command
-
-    """
-    return " ! \\( -path " + str(os.path.join(".", rel_path)) + " -prune \\)"
-
 
 def get_rm_list(dir_path, rel_path_tree):
     """
@@ -61,13 +41,13 @@ def get_rm_list(dir_path, rel_path_tree):
                 child_tree = rel_path_tree[comp]
                 if bool(child_tree):
                     rm_child_list = get_rm_list(child_path, child_tree)
-                    rm_child_list = [os.path.join(comp, child)
+                    rm_child_list = [str(os.path.join(comp, child))
                                      for child in rm_child_list]
                     rm_list.extend(rm_child_list)
     return rm_list
 
 
-def filt(src_paths, dst_repo=None, dst_branch=None, bkp_repo=True):
+def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True):
     """
     filt(src_paths, dst_repo, dst_branch, bkp_repo=True)
 
@@ -87,8 +67,8 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp_repo=True):
         Destination branch on the remote repo. If not specified, master
         branch will not be considered
 
-    bkp_repo : bool, optional
-        If True, entire repo will be backed up to a different folder before
+    bkp : bool, optional
+        If True, a backup will be created before
         proceeding
 
     Raises
@@ -124,26 +104,38 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp_repo=True):
                 sub_tree[comp] = {}
             sub_tree = sub_tree[comp]
 
-    find_cmd_pre = "find analytics . "
-    # rem_empty_cmd = "git filter-branch -f --prune-empty -- --all"
+    rm_cmd_pre = "git rm --cached --ignore-unmatch -r "
     rm_list = get_rm_list(cwd, path_tree)
+    rm_cmd = rm_cmd_pre + " ".join(rm_list)
+    os.system("git filter-branch -f --index-filter '" + rm_cmd + "' HEAD")
+    os.system("git filter-branch -f --prune-empty "
+              "--tag-name-filter cat -- --all")
+    
+    if (dst_repo is not None):
+        os.system("git push " + dst_repo + " " + src_branch)
+        tags = os.popen("git tag").read().split("\n")
+        if ("" in tags):
+            tags.remove("")
+        for tag in tags:
+            tag_branches = os.popen("git branch --contains '" +
+                                    tag + "'").read().split("\n")
+            if src_branch in tag_branches:
+                os.system("git push " + dst_repo + " '" + tag + "'")
 
-    return rm_list
+    return
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Migrate Specified Files "
-                                     "From The Specified Branch To The Given "
+                                     "From The Current Branch To The Given "
                                      "Remote Repository")
-    parser.add_argument('-sb', required=True,
-                        help="<Required> Source Branch")
     parser.add_argument("-sp", nargs="+", required=True,
                         help="<Required> Source Paths")
     parser.add_argument('-dr', default=None,
                         help="Destination Remote Repository")
     parser.add_argument("-db", default=None,
                         help="Destination Branch")
-    parser.add_argument("-mb", default=None,
-                        help="Migration branch")
+    parser.add_argument("-b", default=True, action='store_false',
+                        help="Create a backup before proceeding")
     args = parser.parse_args()
-    migrate(args.sb, args.sp, args.dr, args.db, args.mb)
+    filt(args.sp, args.dr, args.db, args.bk)
