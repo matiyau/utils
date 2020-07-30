@@ -120,11 +120,11 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True, force=False):
     rm_cmd = rm_cmd_pre + " ".join(rm_list)
     os.system("git filter-branch" + f_flag +
               " --index-filter '" + rm_cmd + "' HEAD")
-    os.system("git filter-branch" + f_flag + " --prune-empty "
-              "--tag-name-filter cat -- --all")
+    os.system("git filter-branch" + f_flag + " --prune-empty -- --all")
 
     if (dst_repo is not None):
-        os.system("git push " + dst_repo + " " + src_branch)
+        os.system("git push" + f_flag + " " + dst_repo + " " + src_branch +
+                  ":" + dst_branch)
         tags = os.popen("git tag").read().split("\n")
         if ("" in tags):
             tags.remove("")
