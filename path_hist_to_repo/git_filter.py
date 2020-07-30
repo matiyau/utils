@@ -89,6 +89,7 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True, force=False):
         raise OSError(str(cwd) + " Is Not A Git Repository")
 
     src_branch = os.popen("git branch --show-current").read().strip("\n")
+    print(src_branch)
     if (bkp):
         os.system("git branch -c " + src_branch + " " + src_branch + "_bkp")
 
@@ -119,7 +120,8 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True, force=False):
     rm_list = get_rm_list(cwd, path_tree)
     rm_cmd = rm_cmd_pre + " ".join(rm_list)
     os.system("git filter-branch" + f_flag +
-              " --index-filter '" + rm_cmd + "' HEAD")
+              " --index-filter '" + rm_cmd +
+              "' --tag-name-filter cat -- --all")
     os.system("git filter-branch" + f_flag + " --prune-empty -- --all")
 
     if (dst_repo is not None):
@@ -129,8 +131,8 @@ def filt(src_paths, dst_repo=None, dst_branch=None, bkp=True, force=False):
         if ("" in tags):
             tags.remove("")
         for tag in tags:
-            tag_branches = os.popen("git branch --contains '" +
-                                    tag + "'").read().split("\n")
+            temp = os.popen("git branch --contains '" + tag + "'").read()
+            tag_branches = temp.replace("* ", "").replace("  ", "").split("\n")
             if src_branch in tag_branches:
                 os.system("git push" + f_flag + " " +
                           dst_repo + " '" + tag + "'")
