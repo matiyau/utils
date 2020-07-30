@@ -60,6 +60,12 @@ function alias_git {
 	alias gfb='git filter-branch'
 	alias gfbf='git filter-branch -f'
 	alias gcl='git clone'
+	alias gclr='git clone --recurse-submodules'	
+	alias gmd='git submodule'
+	alias gmdi='git submodule init'
+	alias gmdu='git submodule update'
+	alias gtr='git subtree'
+	alias grv='git revert'
 }
 
 function alias_py {
