@@ -71,21 +71,15 @@ function alias_git {
 function alias_py {
 	alias spy='nohup spyder3 &'
 	alias py='python3'
-	alias py2='python'
 	alias pin='pip3 install'
 	alias pun='pip3 uninstall'
 	alias pfr='pip3 freeze'
 	alias psh='pip3 show'
 	alias psr='pip3 search'
 	alias pls='pip3 list'
-	alias p2in='pip install'
-	alias p2un='pip uninstall'
-	alias p2fr='pip freeze'
-	alias p2sh='pip show'
-	alias p2sr='pip search'
-	alias p2ls='pip list'
 	alias prq='pipreqs'
 	alias prqf='pipreqs --force'
+	alias pht='python3 -m http.server'
 }
 
 function alias_conda {
