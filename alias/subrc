@@ -66,6 +66,11 @@ function alias_git {
 	alias gmdu='git submodule update'
 	alias gtr='git subtree'
 	alias grv='git revert'
+	alias gcf='git config'
+	alias gcfl='git config --local'
+	alias gcfg='git config --global'
+	alias gcfgn='git config --global user.name'
+	alias gcfge='git config --global user.email'
 }
 
 function alias_py {
