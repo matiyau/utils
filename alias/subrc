@@ -77,6 +77,7 @@ function alias_py {
 	alias spy='nohup spyder3 &'
 	alias py='python3'
 	alias pin='pip3 install'
+	alias pinu='pip3 install --upgrade'
 	alias pun='pip3 uninstall'
 	alias pfr='pip3 freeze'
 	alias psh='pip3 show'
@@ -98,6 +99,11 @@ function alias_conda {
 	alias cpk='conda package'
 	alias cls='conda list'
 	alias ccr='conda create'
+}
+
+function alias_ls {
+	alias lsl='ls -l'
+	alias lsa='ls -a'
 }
 
 function alias_make {
