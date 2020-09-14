@@ -100,14 +100,33 @@ function alias_conda {
 	alias ccr='conda create'
 }
 
+function alias_make {
+	alias mk='make'
+	alias ma='make all'
+	alias mc='make clean'
+}
+
+function alias_slurm {
+	alias sb='sbatch'
+	alias sc='scancel'
+	alias sq='squeue'
+	alias sqj='squeue -j'
+	alias sqsj='squeue --start -j'
+	alias sr='srun'
+}
+
 function alias_misc {
 	alias st='sudo subl'
 	alias brc='sudo subl ~/.bashrc'
 	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
+	alias nn="nano"
+	alias stu="ssh nmandlik@student-linux.tudelft.nl"
 }
 
 alias_apt
 alias_git
 alias_py
 alias_conda
+alias_make
+alias_slurm
 alias_misc
