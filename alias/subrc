@@ -133,6 +133,7 @@ alias_apt
 alias_git
 alias_py
 alias_conda
+alias_ls
 alias_make
 alias_slurm
 alias_misc
