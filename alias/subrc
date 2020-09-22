@@ -126,7 +126,7 @@ function alias_misc {
 	alias brc='sudo subl ~/.bashrc'
 	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
 	alias nn="nano"
-	alias stu="ssh nmandlik@student-linux.tudelft.nl"
+	alias nvvp="nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
 }
 
 alias_apt
