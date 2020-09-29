@@ -106,6 +106,13 @@ function alias_ls {
 	alias lsa='ls -a'
 }
 
+function alias_rm {
+	alias rmrf='rm -rf'
+	alias rmr='rm -r'
+	alias srmrf='sudo rm -rf'
+	alias srmr='sudo rm -r'
+}
+
 function alias_make {
 	alias mk='make'
 	alias ma='make all'
@@ -134,6 +141,7 @@ alias_git
 alias_py
 alias_conda
 alias_ls
+alias_rm
 alias_make
 alias_slurm
 alias_misc
