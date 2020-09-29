@@ -2,3 +2,7 @@
 
 export PATH="$HOME/.local/bin:/usr/local/cuda/bin/:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/targets/x86_64-linux/lib"
+
+function mcd {
+	mkdir $1 && cd $1
+}
