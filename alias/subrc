@@ -134,6 +134,7 @@ function alias_misc {
 	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
 	alias nn="nano"
 	alias nvvp="nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
+	alias ipe="curl https://ipinfo.io/ip"
 }
 
 alias_apt
