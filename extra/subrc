@@ -1,2 +1,5 @@
 #!/bin/bash
 # user-defined content
+
+alias rgi="ssh ry@17.10.19.200"
+alias rge="ssh ry@80.112.147.191"

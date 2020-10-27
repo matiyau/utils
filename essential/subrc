@@ -10,5 +10,5 @@ function mcd {
 
 # PDF Grep Current
 function pgc {
-	pdfgrep -lr $1 ./
+	pdfgrep -lr "$1" ./
 }
