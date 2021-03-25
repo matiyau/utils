@@ -120,6 +120,14 @@ function alias_make {
 	alias mk='make'
 	alias ma='make all'
 	alias mc='make clean'
+	alias mi='make install'
+	alias mmc='make menoconfig'
+	alias smi='sudo make install'
+}
+
+function alias_bashrc {
+	alias bre="subl ~/.bashrc" #Edit
+	alias brs="source ~/.bashrc" #Source
 }
 
 function alias_slurm {
@@ -134,7 +142,6 @@ function alias_slurm {
 function alias_misc {
 	alias st='subl'
 	alias sst='sudo subl'
-	alias brc='subl ~/.bashrc'
 	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
 	alias nn="nano"
 	alias nvvp="nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
@@ -145,6 +152,9 @@ function alias_alias {
 	alias alap='alias | grep -e "sudo apt" -e "sudo dpkg"'
 	alias algt='alias | grep -e git'
 	alias alpy='alias | grep -e python -e pip'
+	alias alcn='alias | grep -e conda'
+	alias almk='alias | grep -e make'
+	alias albr='alias | grep -e bashrc'
 }
 
 alias_apt
@@ -154,6 +164,7 @@ alias_conda
 alias_ls
 alias_rm
 alias_make
+alias_bashrc
 alias_slurm
 alias_misc
 alias_alias
