@@ -18,8 +18,12 @@ function ins_apt_pkgs {
 	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
 	rm google-chrome-stable_current_amd64.deb
+	sudo cp $ESSENTIALS_DIR/incognitrome.desktop /usr/share/applications
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+	sudo apt update
+	sudo spt install teams
 	sudo apt install -y uget biglybt xclip dconf-editor gnome-tweaks
-	sudo cp $ESSENTIALS_DIR/incognitrome1.desktop /usr/share/applications
 }
 
 function ins_snap_pkgs {
