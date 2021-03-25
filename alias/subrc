@@ -148,6 +148,11 @@ function alias_misc {
 	alias ipe="curl https://ipinfo.io/ip"
 }
 
+function alias_chmod {
+	alias cx='chmod +x'
+	alias scx='sudo chmod +x'
+}
+
 function alias_alias {
 	alias alap='alias | grep -e "sudo apt" -e "sudo dpkg"'
 	alias algt='alias | grep -e git'
@@ -167,4 +172,5 @@ alias_make
 alias_bashrc
 alias_slurm
 alias_misc
+alias_chmod
 alias_alias
