@@ -111,6 +111,7 @@ function alias_ls {
 function alias_rm {
 	alias rmrf='rm -rf'
 	alias rmr='rm -r'
+	alias srm='sudo rm'
 	alias srmrf='sudo rm -rf'
 	alias srmr='sudo rm -r'
 }
@@ -155,3 +156,4 @@ alias_rm
 alias_make
 alias_slurm
 alias_misc
+alias_alias
