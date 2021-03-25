@@ -13,6 +13,37 @@ function pgc {
 	pdfgrep -lr "$1" ./
 }
 
+function ins_apt_pkgs {
+	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+	rm google-chrome-stable_current_amd64.deb
+	sudo apt install -y uget biglybt xclip dconf-editor gnome-tweaks
+	sudo cp $ESSENTIALS_DIR/incognitrome1.desktop /usr/share/applications
+}
+
+function ins_snap_pkgs {
+	snap install vlc
+	snap install sublime-text
+	snap install sublime-merge
+}
+
+function ins_pip_pkgs {
+	pip3 install --upgrade pip
+	pip3 install numpy scipy matplotlib spyder spyder-terminal spyder-notebook
+}
+
+# setup - Install Necessary Packages on the System
+function stp {
+	sudo apt update
+	sudo apt upgrade -y
+	sudo apt autoremove -y
+	sudo apt install python3 git python3-pip
+	ins_apt_pkgs &
+	ins_snap_pkgs &
+	ins_pip_pkgs &
+}
+
 # Generate ed25519 SSH-Key
 # Might not work on Windows
 function sk {
