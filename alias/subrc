@@ -121,7 +121,7 @@ function alias_make {
 	alias ma='make all'
 	alias mc='make clean'
 	alias mi='make install'
-	alias mmc='make menoconfig'
+	alias mmc='make menuconfig'
 	alias smi='sudo make install'
 }
 

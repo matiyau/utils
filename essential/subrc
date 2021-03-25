@@ -12,3 +12,28 @@ function mcd {
 function pgc {
 	pdfgrep -lr "$1" ./
 }
+
+# Generate ed25519 SSH-Key
+# Might not work on Windows
+function sk {
+	TARGET=$1
+	if [ "$1" = "gh" ]; then
+		TARGET="github"
+	elif [ "$1" = "gl" ]; then
+		TARGET="gitlab"
+	elif [ "$1" = "bb" ]; then
+		TARGET="ol"
+	elif [ "$1" = "bb" ]; then
+		TARGET="overleaf"
+	elif [ "$1" = "rp" ]; then
+		TARGET="raspberrypi"
+	fi
+	OS=$(lsb_release -is)
+	VER=$(lsb_release -cs)
+	MODEL=$(cat /sys/devices/virtual/dmi/id/product_name)
+	KEY_COMMENT="$MODEL - $OS $VER"
+	KEY_PRV="$HOME/.ssh/ed25519_$TARGET"
+	KEY_PUB="$KEY_PRV.pub"
+	ssh-keygen -t ed25519 -f $KEY_PRV -C "$KEY_COMMENT"
+	cat $KEY_PUB | xclip -i
+}
