@@ -4,9 +4,11 @@ function alias_apt {
 	alias upd='sudo apt update'
 	alias upg='sudo apt upgrade'
 	alias ins='sudo apt install'
+	alias insf='sudo apt install -f'
 	alias rmv='sudo apt remove'
 	alias prg='sudo apt purge'
 	alias atr='sudo apt autoremove'
+	alias dpk='sudo dpkg -i'
 }
 
 function alias_git {
@@ -16,7 +18,7 @@ function alias_git {
 	alias gbrD='git branch -D'
 	alias gbrc='git branch --show-current'
 	alias gad='git add'
-	alias gada='git add -a'
+	alias gada='git add -A'
 	alias gadu='git add -u'
 	alias gst='git status'
 	alias gcm='git commit -m'
@@ -129,12 +131,19 @@ function alias_slurm {
 }
 
 function alias_misc {
-	alias st='sudo subl'
-	alias brc='sudo subl ~/.bashrc'
+	alias st='subl'
+	alias sst='sudo subl'
+	alias brc='subl ~/.bashrc'
 	alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
 	alias nn="nano"
 	alias nvvp="nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
 	alias ipe="curl https://ipinfo.io/ip"
+}
+
+function alias_alias {
+	alias alap='alias | grep -e "sudo apt" -e "sudo dpkg"'
+	alias algt='alias | grep -e git'
+	alias alpy='alias | grep -e python -e pip'
 }
 
 alias_apt
