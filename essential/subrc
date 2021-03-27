@@ -65,6 +65,7 @@ function ins_pip_pkgs {
 
 # setup - Install Necessary Packages on the System
 function stp {
+	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 	sudo apt update
 	sudo apt upgrade -y
 	sudo apt autoremove -y
@@ -72,6 +73,21 @@ function stp {
 	ins_apt_pkgs &
 	ins_snap_pkgs &
 	ins_pip_pkgs &
+	rm -rf $HOME/Desktop
+	rm -rf $HOME/Documents
+	rm -rf $HOME/Downloads
+	rm -rf $HOME/Music
+	rm -rf $HOME/Pictures
+	rm -rf $HOME/Videos
+	ln -s /mnt/n7/Desktop/ $HOME/
+	ln -s /mnt/n7/Documents/ $HOME/
+	ln -s /mnt/n7/Downloads/ $HOME/
+	ln -s /mnt/n7/Music/ $HOME/
+	ln -s /mnt/n7/Pictures/ $HOME/
+	ln -s /mnt/n7/Videos/ $HOME/
+	mkdir -p $HOME/Pictures/Wallpapers
+	cp ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
+	gsettings set org.gnome.desktop.background picture-uri file:////$HOME/Pictures/Wallpapers/RoboISM\ Logo.png
 }
 
 # Generate ed25519 SSH-Key
