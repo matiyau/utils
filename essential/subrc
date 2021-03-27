@@ -35,8 +35,13 @@ function ins_apt_pkgs {
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
 	sudo apt update
-	sudo spt install teams
-	sudo apt install -y uget biglybt xclip dconf-editor gnome-tweaks
+	sudo apt install teams
+	sudo apt install -f
+	wget https://zoom.us/client/latest/zoom_amd64.deb
+	sudo dpkg -i zoom_amd64.deb
+	sudo apt install -f
+	rm zoom_amd64.deb
+	sudo apt install -y git uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
 }
 
 # Install all snap packages
