@@ -41,9 +41,15 @@ function ins_apt_pkgs {
 
 # Install all snap packages
 function ins_snap_pkgs {
+	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 	snap install vlc
 	snap install sublime-text
 	snap install sublime-merge
+	wget https://packagecontrol.io/Package%20Control.sublime-package
+	mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
+	mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
+	subl
+	cp -r $ESSENTIALS_DIR/config/* $HOME/.config
 }
 
 # Install all pip packages
