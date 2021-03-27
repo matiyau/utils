@@ -32,24 +32,27 @@ function ins_apt_pkgs {
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
 	rm google-chrome-stable_current_amd64.deb
 	sudo cp $ESSENTIALS_DIR/incognitrome.desktop /usr/share/applications
+	sudo apt install -y wget curl
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
 	sudo apt update
 	sudo apt install teams
-	sudo apt install -f
+	sudo apt install -fy
 	wget https://zoom.us/client/latest/zoom_amd64.deb
 	sudo dpkg -i zoom_amd64.deb
-	sudo apt install -f
+	sudo apt install -fy
 	rm zoom_amd64.deb
-	sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essentials uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
+	sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essential uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
 }
 
 # Install all snap packages
 function ins_snap_pkgs {
 	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 	snap install vlc
-	snap install sublime-text
-	snap install sublime-merge
+	snap install --classic sublime-text
+	snap install --classic sublime-merge
+	snap install discord
+	snap install --classic code
 	wget https://packagecontrol.io/Package%20Control.sublime-package
 	mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
 	mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
