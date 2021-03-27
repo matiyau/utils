@@ -3,11 +3,16 @@
 function alias_apt {
 	alias upd='sudo apt update'
 	alias upg='sudo apt upgrade'
+	alias upgy='sudo apt upgrade -y'
 	alias ins='sudo apt install'
+	alias insy='sudo apt install -y'
 	alias insf='sudo apt install -f'
 	alias rmv='sudo apt remove'
+	alias rmvy='sudo apt remove -y'
 	alias prg='sudo apt purge'
+	alias prgy='sudo apt purge -y'
 	alias atr='sudo apt autoremove'
+	alias atry='sudo apt autoremove -y'
 	alias dpk='sudo dpkg -i'
 }
 
