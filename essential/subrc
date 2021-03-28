@@ -42,6 +42,7 @@ function ins_apt_pkgs {
 	sudo dpkg -i zoom_amd64.deb
 	sudo apt install -fy
 	rm zoom_amd64.deb
+    rm wget-log*
 	sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essential uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
 }
 
@@ -56,6 +57,7 @@ function ins_snap_pkgs {
 	wget https://packagecontrol.io/Package%20Control.sublime-package
 	mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
 	mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
+    rm wget-log*
 	subl
 	cp -r $ESSENTIALS_DIR/config/* $HOME/.config
 }
@@ -89,7 +91,7 @@ function stp {
 	ln -s /mnt/n7/Pictures/ $HOME/
 	ln -s /mnt/n7/Videos/ $HOME/
 	mkdir -p $HOME/Pictures/Wallpapers
-	cp ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
+	cp $ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
 	gsettings set org.gnome.desktop.background picture-uri file:////$HOME/Pictures/Wallpapers/RoboISM\ Logo.png
 }
 
