@@ -104,8 +104,8 @@ function sk {
 	elif [ "$1" = "gl" ]; then
 		TARGET="gitlab"
 	elif [ "$1" = "bb" ]; then
-		TARGET="ol"
-	elif [ "$1" = "bb" ]; then
+		TARGET="bitbucket"
+	elif [ "$1" = "ol" ]; then
 		TARGET="overleaf"
 	elif [ "$1" = "rp" ]; then
 		TARGET="raspberrypi"
