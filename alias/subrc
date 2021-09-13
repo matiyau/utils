@@ -90,8 +90,10 @@ function alias_py {
 	alias psh='pip3 show'
 	alias psr='pip3 search'
 	alias pls='pip3 list'
-	alias prq='pipreqs --no-pin && echo sphinxcontrib_napoleon >> requirements.txt && echo sphinx_rtd_theme >> requirements.txt && echo m2r2 >> requirements.txt'
-	alias prqf='pipreqs --no-pin --force && echo sphinxcontrib_napoleon >> requirements.txt && echo sphinx_rtd_theme >> requirements.txt && echo m2r2 >> requirements.txt'
+	alias prq='pipreqs --no-pin --encoding=utf8'
+	alias prqs='pipreqs --no-pin --encoding=utf8 && echo sphinxcontrib_napoleon >> requirements.txt && echo sphinx_rtd_theme >> requirements.txt && echo m2r2 >> requirements.txt'
+	alias prqf='pipreqs --no-pin --encoding=utf8 --force'
+	alias prqfs='pipreqs --no-pin --encoding=utf8 --force && echo sphinxcontrib_napoleon >> requirements.txt && echo sphinx_rtd_theme >> requirements.txt && echo m2r2 >> requirements.txt'
 	alias pht='python3 -m http.server'
 }
 
