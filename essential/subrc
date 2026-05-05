@@ -1,131 +1,131 @@
 #!/bin/bash
 
 export PATH="$HOME/.local/bin:/usr/local/cuda/bin/:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/targets/x86_64-linux/lib"
+# export LD_LIBRARY_PATH="/usr/local/cuda/targets/x86_64-linux/lib"
 
 # Make and CD
 function mcd {
-	mkdir $1 && cd $1
+    mkdir $1 && cd $1
 }
 
 # PDF Grep Current
 function pgc {
-	pdfgrep -lr "$1" ./
+    pdfgrep -lr "$1" ./
 }
 
 # PDF Grep Current
 function cxr {
-	chmod +x $1
-	./$1
+    chmod +x $1
+    ./$1
 }
 
 # PDF Grep Current
 function scxr {
-	sudo chmod +x $1
-	sudo ./$1
+    sudo chmod +x $1
+    sudo ./$1
 }
 
 # Install all apt packages
 function ins_apt_pkgs {
-	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-	wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	rm google-chrome-stable_current_amd64.deb
-	sudo cp $ESSENTIALS_DIR/incognitrome.desktop /usr/share/applications
-	sudo apt install -y wget curl
-	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
-	sudo apt update
-	sudo apt install teams
-	sudo apt install -fy
-	wget https://zoom.us/client/latest/zoom_amd64.deb
-	sudo dpkg -i zoom_amd64.deb
-	sudo apt install -fy
-	rm zoom_amd64.deb
+    ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    rm google-chrome-stable_current_amd64.deb
+    sudo cp $ESSENTIALS_DIR/incognitrome.desktop /usr/share/applications
+    sudo apt install -y wget curl
+    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+    sudo apt update
+    sudo apt install teams
+    sudo apt install -fy
+    wget https://zoom.us/client/latest/zoom_amd64.deb
+    sudo dpkg -i zoom_amd64.deb
+    sudo apt install -fy
+    rm zoom_amd64.deb
     rm wget-log*
-	sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essential uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
+    sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essential uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
 }
 
 # Install all snap packages
 function ins_snap_pkgs {
-	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-	snap install vlc
-	snap install --classic sublime-text
-	snap install --classic sublime-merge
-	snap install discord
-	snap install --classic code
-	wget https://packagecontrol.io/Package%20Control.sublime-package
-	mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
-	mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
+    ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    snap install vlc
+    snap install --classic sublime-text
+    snap install --classic sublime-merge
+    snap install discord
+    snap install --classic code
+    wget https://packagecontrol.io/Package%20Control.sublime-package
+    mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
+    mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
     rm wget-log*
-	subl
-	cp -r $ESSENTIALS_DIR/config/* $HOME/.config
+    subl
+    cp -r $ESSENTIALS_DIR/config/* $HOME/.config
 }
 
 # Install all pip packages
 function ins_pip_pkgs {
-	pip3 install --upgrade pip
-	pip3 install numpy scipy matplotlib spyder spyder-terminal spyder-notebook
+    pip3 install --upgrade pip
+    pip3 install numpy scipy matplotlib spyder spyder-terminal spyder-notebook
 }
 
 # setup - Install Necessary Packages on the System
 function stp {
-	ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-	sudo apt update
-	sudo apt upgrade -y
-	sudo apt autoremove -y
-	sudo apt install python3 git python3-pip
-	ins_apt_pkgs &
-	ins_snap_pkgs &
-	ins_pip_pkgs &
-	rm -rf $HOME/Desktop
-	rm -rf $HOME/Documents
-	rm -rf $HOME/Downloads
-	rm -rf $HOME/Music
-	rm -rf $HOME/Pictures
-	rm -rf $HOME/Videos
-	ln -s /mnt/n7/Desktop/ $HOME/
-	ln -s /mnt/n7/Documents/ $HOME/
-	ln -s /mnt/n7/Downloads/ $HOME/
-	ln -s /mnt/n7/Music/ $HOME/
-	ln -s /mnt/n7/Pictures/ $HOME/
-	ln -s /mnt/n7/Videos/ $HOME/
-	mkdir -p $HOME/Pictures/Wallpapers
-	cp $ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
-	gsettings set org.gnome.desktop.background picture-uri file:////$HOME/Pictures/Wallpapers/RoboISM\ Logo.png
+    ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+    sudo apt install python3 git python3-pip
+    ins_apt_pkgs &
+    ins_snap_pkgs &
+    ins_pip_pkgs &
+    rm -rf $HOME/Desktop
+    rm -rf $HOME/Documents
+    rm -rf $HOME/Downloads
+    rm -rf $HOME/Music
+    rm -rf $HOME/Pictures
+    rm -rf $HOME/Videos
+    ln -s /mnt/n7/Desktop/ $HOME/
+    ln -s /mnt/n7/Documents/ $HOME/
+    ln -s /mnt/n7/Downloads/ $HOME/
+    ln -s /mnt/n7/Music/ $HOME/
+    ln -s /mnt/n7/Pictures/ $HOME/
+    ln -s /mnt/n7/Videos/ $HOME/
+    mkdir -p $HOME/Pictures/Wallpapers
+    cp $ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
+    gsettings set org.gnome.desktop.background picture-uri file:////$HOME/Pictures/Wallpapers/RoboISM\ Logo.png
 }
 
 # Generate ed25519 SSH-Key
 # Might not work on Windows
 function sk {
-	TARGET=$1
-	if [ "$1" = "gh" ]; then
-		TARGET="github"
-	elif [ "$1" = "gl" ]; then
-		TARGET="gitlab"
-	elif [ "$1" = "bb" ]; then
-		TARGET="bitbucket"
-	elif [ "$1" = "ol" ]; then
-		TARGET="overleaf"
-	elif [ "$1" = "rp" ]; then
-		TARGET="raspberrypi"
-	fi
-	OS=$(lsb_release -is)
-	VER=$(lsb_release -cs)
-	MODEL=$(cat /sys/devices/virtual/dmi/id/product_name)
-	KEY_COMMENT="$MODEL - $OS $VER"
-	KEY_PRV="$HOME/.ssh/ed25519_$TARGET"
-	KEY_PUB="$KEY_PRV.pub"
-	ssh-keygen -t ed25519 -f $KEY_PRV -C "$KEY_COMMENT"
-	cat $KEY_PUB | xclip -selection clipboard
+    TARGET=$1
+    if [ "$1" = "gh" ]; then
+        TARGET="github"
+    elif [ "$1" = "gl" ]; then
+        TARGET="gitlab"
+    elif [ "$1" = "bb" ]; then
+        TARGET="bitbucket"
+    elif [ "$1" = "ol" ]; then
+        TARGET="overleaf"
+    elif [ "$1" = "rp" ]; then
+        TARGET="raspberrypi"
+    fi
+    OS=$(lsb_release -is)
+    VER=$(lsb_release -cs)
+    MODEL=$(cat /sys/devices/virtual/dmi/id/product_name)
+    KEY_COMMENT="$MODEL - $OS $VER"
+    KEY_PRV="$HOME/.ssh/ed25519_$TARGET"
+    KEY_PUB="$KEY_PRV.pub"
+    ssh-keygen -t ed25519 -f $KEY_PRV -C "$KEY_COMMENT"
+    cat $KEY_PUB | xclip -selection clipboard
 }
 
 # Kill process on a port
 function kp {
-	PID=$(sudo lsof -t -i:$1)
-	if [ "$PID" = "" ]; then
-		echo "No Process Running on Port $1"
-	else
-		sudo kill -9 $(sudo lsof -t -i:$1)
-	fi	
+    PID=$(sudo lsof -t -i:$1)
+    if [ "$PID" = "" ]; then
+        echo "No Process Running on Port $1"
+    else
+        sudo kill -9 $(sudo lsof -t -i:$1)
+    fi
 }
