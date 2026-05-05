@@ -1,71 +1,48 @@
 #!/bin/bash
 
-export PATH="$HOME/.local/bin:/usr/local/cuda/bin/:$PATH"
-# export LD_LIBRARY_PATH="/usr/local/cuda/targets/x86_64-linux/lib"
+export GPG_TTY=$(tty)
 
 # Make and CD
 function mcd {
-    mkdir $1 && cd $1
+    mkdir -p $1 && cd $1
 }
 
-# PDF Grep Current
-function pgc {
-    pdfgrep -lr "$1" ./
+function pip3() {
+    VENV_PATH="$HOME/py_venv_default"
+
+    if [ -f "$VENV_PATH/pyvenv.cfg" ]; then
+        echo "Starting pip in default venv"
+        env VIRTUAL_ENV="$VENV_PATH" "$VENV_PATH/bin/pip3" "$@"
+    else
+        echo "Starting pip in global environment"
+        /usr/bin/pip3 "$@"
+    fi
 }
 
-# PDF Grep Current
-function cxr {
-    chmod +x $1
-    ./$1
-}
+function python3() {
+    VENV_PATH="$HOME/py_venv_default"
 
-# PDF Grep Current
-function scxr {
-    sudo chmod +x $1
-    sudo ./$1
+    if [ -f "$VENV_PATH/pyvenv.cfg" ]; then
+        echo "Starting python in default venv"
+        env VIRTUAL_ENV="$VENV_PATH" "$VENV_PATH/bin/python3" "$@"
+    else
+        echo "Starting python in global environment"
+        /usr/bin/python3 "$@"
+    fi
 }
 
 # Install all apt packages
 function ins_apt_pkgs {
     ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo dpkg -i google-chrome-stable_current_amd64.deb
-    rm google-chrome-stable_current_amd64.deb
-    sudo cp $ESSENTIALS_DIR/incognitrome.desktop /usr/share/applications
-    sudo apt install -y wget curl
-    curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
     sudo apt update
-    sudo apt install teams
-    sudo apt install -fy
-    wget https://zoom.us/client/latest/zoom_amd64.deb
-    sudo dpkg -i zoom_amd64.deb
-    sudo apt install -fy
-    rm zoom_amd64.deb
-    rm wget-log*
-    sudo apt install -y git make cmake default-jdk openjdk-8-jdk build-essential uget biglybt xclip dconf-editor gnome-tweaks gparted gimp net-tools
-}
-
-# Install all snap packages
-function ins_snap_pkgs {
-    ESSENTIALS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-    snap install vlc
-    snap install --classic sublime-text
-    snap install --classic sublime-merge
-    snap install discord
-    snap install --classic code
-    wget https://packagecontrol.io/Package%20Control.sublime-package
-    mkdir -p "$HOME/.config/sublime-text-3/Installed Packages"
-    mv "Package Control.sublime-package" "$HOME/.config/sublime-text-3/Installed Packages"
-    rm wget-log*
-    subl
-    cp -r $ESSENTIALS_DIR/config/* $HOME/.config
+    sudo apt upgrade -y
+    sudo apt install -y wget curl git make cmake default-jdk build-essential xclip gimp net-tools python3-pip
 }
 
 # Install all pip packages
 function ins_pip_pkgs {
     pip3 install --upgrade pip
-    pip3 install numpy scipy matplotlib spyder spyder-terminal spyder-notebook
+    pip3 install numpy scipy matplotlib spyder pandas
 }
 
 # setup - Install Necessary Packages on the System
@@ -76,7 +53,6 @@ function stp {
     sudo apt autoremove -y
     sudo apt install python3 git python3-pip
     ins_apt_pkgs &
-    ins_snap_pkgs &
     ins_pip_pkgs &
     rm -rf $HOME/Desktop
     rm -rf $HOME/Documents
@@ -84,12 +60,12 @@ function stp {
     rm -rf $HOME/Music
     rm -rf $HOME/Pictures
     rm -rf $HOME/Videos
-    ln -s /mnt/n7/Desktop/ $HOME/
-    ln -s /mnt/n7/Documents/ $HOME/
-    ln -s /mnt/n7/Downloads/ $HOME/
-    ln -s /mnt/n7/Music/ $HOME/
-    ln -s /mnt/n7/Pictures/ $HOME/
-    ln -s /mnt/n7/Videos/ $HOME/
+    ln -s /mnt/n/Desktop/ $HOME/
+    ln -s /mnt/n/Documents/ $HOME/
+    ln -s /mnt/n/Downloads/ $HOME/
+    ln -s /mnt/n/Music/ $HOME/
+    ln -s /mnt/n/Pictures/ $HOME/
+    ln -s /mnt/n/Videos/ $HOME/
     mkdir -p $HOME/Pictures/Wallpapers
     cp $ESSENTIALS_DIR/wallpapers/* $HOME/Pictures/Wallpapers/
     gsettings set org.gnome.desktop.background picture-uri file:////$HOME/Pictures/Wallpapers/RoboISM\ Logo.png

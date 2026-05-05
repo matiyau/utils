@@ -80,14 +80,17 @@ function alias_git {
     alias gcfge='git config --global user.email'
     alias gcfgs='git config --global user.signingkey'
     alias gcfl='git config --local'
-    alias gcfln='git config --global user.name'
-    alias gcfle='git config --global user.email'
+    alias gcfln='git config --local user.name'
+    alias gcfle='git config --local user.email'
     alias gcfls='git config --local user.signingkey'
+    alias grb='git rebase'
 }
 
 function alias_py {
     alias spy='nohup spyder3 &'
     alias py='python3'
+    alias py3='python3'
+    alias pyve='python3 -m venv $HOME/py_venv_default'
     alias pin='pip3 install'
     alias pinu='pip3 install --upgrade'
     alias pun='pip3 uninstall'
@@ -100,24 +103,14 @@ function alias_py {
     alias prqf='pipreqs --no-pin --encoding=utf8 --force'
     alias prqfs='pipreqs --no-pin --encoding=utf8 --force && echo sphinxcontrib_napoleon >> requirements.txt && echo sphinx_rtd_theme >> requirements.txt && echo m2r2 >> requirements.txt'
     alias pht='python3 -m http.server'
-}
-
-function alias_conda {
-    alias cpy='nohup spyder &'
-    alias cin='conda install'
-    alias crm='conda remove'
-    alias cac='export PYTHONNOUSERSITE=1 && conda activate'
-    alias cde='export PYTHONNOUSERSITE=0 && conda deactivate'
-    alias csr='conda search'
-    alias cup='conda update'
-    alias cpk='conda package'
-    alias cls='conda list'
-    alias ccr='conda create'
+    alias python='python3'
+    alias pip='pip3'
 }
 
 function alias_ls {
     alias lsl='ls -l'
     alias lsa='ls -a'
+    alias lsla='ls -la'
 }
 
 function alias_rm {
@@ -133,7 +126,6 @@ function alias_make {
     alias ma='make all'
     alias mc='make clean'
     alias mi='make install'
-    alias mmc='make menuconfig'
     alias smi='sudo make install'
 }
 
@@ -142,22 +134,10 @@ function alias_bashrc {
     alias brs="source ~/.bashrc" #Source
 }
 
-function alias_slurm {
-    alias sb='sbatch'
-    alias sc='scancel'
-    alias sq='squeue'
-    alias sqj='squeue -j'
-    alias sqsj='squeue --start -j'
-    alias sr='srun'
-}
-
 function alias_misc {
     alias st='subl'
     alias sst='sudo subl'
-    alias yt='youtube-dl -f bestvideo+bestaudio[ext=m4a] --merge-output-format mp4'
     alias nn="nano"
-    alias nvvp="nvvp -vm /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"
-    alias ipe="curl https://ipinfo.io/ip"
 }
 
 function alias_chmod {
@@ -177,12 +157,10 @@ function alias_alias {
 alias_apt
 alias_git
 alias_py
-alias_conda
 alias_ls
 alias_rm
 alias_make
 alias_bashrc
-alias_slurm
 alias_misc
 alias_chmod
 alias_alias
