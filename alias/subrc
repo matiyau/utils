@@ -22,6 +22,7 @@ function alias_git {
     alias gbrd='git branch -d'
     alias gbrD='git branch -D'
     alias gbrc='git branch --show-current'
+    alias gbrm='git branch -m'
     alias gad='git add'
     alias gada='git add -A'
     alias gadu='git add -u'
@@ -74,10 +75,14 @@ function alias_git {
     alias gtr='git subtree'
     alias grv='git revert'
     alias gcf='git config'
-    alias gcfl='git config --local'
     alias gcfg='git config --global'
     alias gcfgn='git config --global user.name'
     alias gcfge='git config --global user.email'
+    alias gcfgs='git config --global user.signingkey'
+    alias gcfl='git config --local'
+    alias gcfln='git config --global user.name'
+    alias gcfle='git config --global user.email'
+    alias gcfls='git config --local user.signingkey'
 }
 
 function alias_py {
