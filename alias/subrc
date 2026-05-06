@@ -154,7 +154,7 @@ function alias_chmod {
 function alias_gpg {
     # using gpg.. alias instead of g.. so that it does not conflict with git aliases
     alias gppg='gpg --full-generate-key'                    # Generate
-    alias gpgl='gpg --list-secret-keys --keyid-format=long | grep -E "sec|uid|^$" | sed -E "s/sec( +)//" | sed -E "s/uid( +)\[([a-z, A-Z]+)\] //"'  # List
+    alias gpgl='gpg --list-secret-keys --keyid-format=long | grep -E "sec|uid|ssb|^$" | sed -E "s/uid( +)\[([a-z, A-Z]+)\] //"'  # List
     alias gpge='gpg --armor --export'                       # Export
 }
 
