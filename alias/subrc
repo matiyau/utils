@@ -79,10 +79,16 @@ function alias_git {
     alias gcfgn='git config --global user.name'
     alias gcfge='git config --global user.email'
     alias gcfgs='git config --global user.signingkey'
+    alias gcfgg='git config --global commit.gpgsign'
+    alias gcfggt='git config --global commit.gpgsign true'
+    alias gcfggf='git config --global commit.gpgsign false'
     alias gcfl='git config --local'
     alias gcfln='git config --local user.name'
     alias gcfle='git config --local user.email'
     alias gcfls='git config --local user.signingkey'
+    alias gcflg='git config --local commit.gpgsign'
+    alias gcflgt='git config --local commit.gpgsign true'
+    alias gcflgf='git config --local commit.gpgsign false'
     alias grb='git rebase'
 }
 
@@ -145,6 +151,13 @@ function alias_chmod {
     alias scx='sudo chmod +x'
 }
 
+function alias_gpg {
+    # using gpg.. alias instead of g.. so that it does not conflict with git aliases
+    alias gppg='gpg --full-generate-key'                    # Generate
+    alias gpgl='gpg --list-secret-keys --keyid-format=long | grep -E "sec|uid|^$" | sed -E "s/sec( +)//" | sed -E "s/uid( +)\[([a-z, A-Z]+)\] //"'  # List
+    alias gpge='gpg --armor --export'                       # Export
+}
+
 function alias_alias {
     alias alap='alias | grep -e "sudo apt" -e "sudo dpkg"'
     alias algt='alias | grep -e git'
@@ -163,4 +176,5 @@ alias_make
 alias_bashrc
 alias_misc
 alias_chmod
+alias_gpg
 alias_alias
